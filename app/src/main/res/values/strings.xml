@@ -2,4 +2,7 @@
     <string name="app_name">Kotlin Demo</string>
     <string name="hello_scott">Hello Scott!!!</string>
     <string name="news_api_key">1dde2ecb8dd64df5ac53cd202df6e27a</string>
+    <string name="news">News</string>
+    <string name="count">Count</string>
+    <string name="toast">Toast</string>
 </resources>
