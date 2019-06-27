@@ -63,16 +63,11 @@ class NewsActivity : AppCompatActivity() {
                             news_stories.add(News_Model(name,title))
                         }
                         obj_adapter.notifyDataSetChanged()
-
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
                 }
             }
-
-
         })
     }
-
-
 }
