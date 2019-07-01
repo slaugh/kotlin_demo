@@ -3,17 +3,11 @@ package com.example.kotlindemo
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat.startActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_news.*
-import okhttp3.OkHttpClient
 import org.json.JSONArray
-import org.json.JSONObject
+import java.io.File
 import java.io.IOException
 import java.io.InputStream
 
@@ -61,14 +55,17 @@ class MainActivity : AppCompatActivity() {
         myToast.show()
 
         //This is an experiment in reading files - It should print out the names of awesome actors to the logs
-        fileReadExample()
+        fileReadWriteExample()
     }
 
-    private fun fileReadExample() {
+    private fun fileReadWriteExample() {
+        //This is an experiment in reading files - It should print out the names of awesome actors to the logs
         var json: String? = null
         var array = arrayListOf<String>()
 
         try {
+
+            // Successful experiment
             val inputStream: InputStream = assets.open("example2.json")
             json = inputStream.bufferedReader().readText() //This will give the json as text
             var jsonarray = JSONArray(json)
@@ -76,6 +73,35 @@ class MainActivity : AppCompatActivity() {
                 var jsonobj = jsonarray.getJSONObject(i)
                 println("JSON Object: " + jsonobj.getString("first_name"))
             }
+
+            //try writing a file
+            val filename = "writetest.json"
+            val fileContents = "[\n" +
+                    "  {\n" +
+                    "    \"first_name\" : \"Sean\",\n" +
+                    "    \"last_name\" : \"Bean\"\n" +
+                    "  },\n" +
+                    "  {\n" +
+                    "    \"first_name\" : \"Peter\",\n" +
+                    "    \"last_name\" : \"Parker\"\n" +
+                    "  },\n" +
+                    "  {\n" +
+                    "    \"first_name\" : \"Sean\",\n" +
+                    "    \"last_name\" : \"Connery\"\n" +
+                    "  }\n" +
+                    "]"
+
+            //This gives some insight into how they find the filepath, create the file, and where they store it
+            println(this.filesDir)
+            val file = File(this.filesDir, filename)
+            file.writeText(fileContents)
+            println(file.absolutePath)
+
+
+            //Now read and print the file contents
+            val text = file.readText()
+            println(text)
+
 
         } catch (e: IOException) {
             println(e)

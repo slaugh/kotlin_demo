@@ -24,4 +24,4 @@ hs_err_pid*
 
 # Annoying files
 .idea/*
-.gradle/*
+.gradle*
