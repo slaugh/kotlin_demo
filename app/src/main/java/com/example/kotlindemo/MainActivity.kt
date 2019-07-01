@@ -12,6 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_news.*
 import okhttp3.OkHttpClient
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
+import java.io.InputStream
 
 
 class MainActivity : AppCompatActivity() {
@@ -55,6 +59,27 @@ class MainActivity : AppCompatActivity() {
         // val myToast = Toast.makeText(this, message, duration);
         val myToast = Toast.makeText(this, "Hello Toast!", Toast.LENGTH_SHORT)
         myToast.show()
+
+        //This is an experiment in reading files - It should print out the names of awesome actors to the logs
+        fileReadExample()
+    }
+
+    private fun fileReadExample() {
+        var json: String? = null
+        var array = arrayListOf<String>()
+
+        try {
+            val inputStream: InputStream = assets.open("example2.json")
+            json = inputStream.bufferedReader().readText() //This will give the json as text
+            var jsonarray = JSONArray(json)
+            for (i in 0..jsonarray.length() - 1) {
+                var jsonobj = jsonarray.getJSONObject(i)
+                println("JSON Object: " + jsonobj.getString("first_name"))
+            }
+
+        } catch (e: IOException) {
+            println(e)
+        }
     }
 
     fun countMe (view: View) {
