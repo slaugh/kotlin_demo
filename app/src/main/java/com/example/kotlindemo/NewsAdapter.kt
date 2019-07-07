@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.news_row.view.*
 
-
+/*
+This is the adapter that will bind the news data to the viewHolders in the Recycler view
+ */
 class NewsAdapter(private val arrayList: ArrayList<News_Model>,
                          private val context: Context,
                          private val layout: Int) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {

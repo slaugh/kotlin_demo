@@ -6,21 +6,24 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.LinearLayout
-//import io.reactivex.rxkotlin.toObservable
-//import io.reactivex.rxkotlin.Observable
 import kotlinx.android.synthetic.main.activity_news.*
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
-
+/**
+ * NewsActivity Downloads and displays the news
+ */
 class NewsActivity : AppCompatActivity() {
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
+
+        //Parcel eperiments
+        parcelExperiments()
 
         //1. Initiate Model
         val news_stories = ArrayList<News_Model>()
@@ -30,21 +33,12 @@ class NewsActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         news_recycler.layoutManager = layoutManager
         news_recycler.adapter = obj_adapter
-
-//        //RxKotlin Study of Observables and subscriptions
-//        Observable.just("Hello KotlinRx").subscribe{
-//            println(it)
-//        }
-//
-//        val popular: Observable<String> = Observable.just("StarWars")
-//        popular.subscribe(){println(it)}
-//
-//        val stories = listOf("solo", "rogueOne", "theLastJedi").toObservable()
-
         getNews(news_stories, obj_adapter)
-
      }
 
+    /**
+     * This function will download the news and display the headlines in a recycler view
+     */
     private fun getNews(
         news_stories: ArrayList<News_Model>,
         obj_adapter: NewsAdapter
@@ -91,5 +85,21 @@ class NewsActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    /**
+     * Experiments for unpacking and using parcelable classes. This is a continuation of the packing experiments
+     * Condensed into a function for readability of the primary code
+     */
+    private fun parcelExperiments() {
+        //Parcelize Experiment1
+        val item = intent.getParcelableExtra<ParcelableClass>("ParcelClass")
+        println("Unboxed Parcel App Name: " + item.appName)
+        item.present()
+
+        //Parcelize Experiment2
+        val human = intent.getParcelableExtra<ParcelOldSchoolHuman>("human")
+        println("Human Age: " + human.fullName + ", " + human.lastName + ", " + human.age + ", " + human.yearOfBirth)
+        human.present()
     }
 }
