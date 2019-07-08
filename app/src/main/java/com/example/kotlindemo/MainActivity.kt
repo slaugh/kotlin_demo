@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import org.json.JSONArray
@@ -221,7 +224,7 @@ class ParcelOldSchoolHuman(var firstName: String, var lastName: String, var year
             field = value
         }
 
-    /*Interestingly you will have access to the initialized values when you
+    /* Interestingly you will have access to the initialized values when you
     access the method in addition to the member variables
      */
     constructor(parcel: Parcel) : this(
@@ -261,6 +264,7 @@ class ParcelOldSchoolHuman(var firstName: String, var lastName: String, var year
 
 
 }
+
 
 
 
