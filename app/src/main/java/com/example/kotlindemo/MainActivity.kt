@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import org.json.JSONArray
@@ -17,12 +14,14 @@ import java.io.IOException
 import java.io.InputStream
 import kotlinx.android.parcel.Parcelize
 
-
+/**
+ * Main Activity that is created on startup
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        println("OnCreate")
+        println("OnCreate: Main")
     }
 
     /**
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onStart() {
         super.onStart()
-        println("OnStart")
+        println("OnStart: Main")
     }
 
     /**
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onResume() {
         super.onResume()
-        println("OnResume")
+        println("OnResume: Main")
     }
 
     /**
@@ -46,15 +45,15 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onPause() {
         super.onPause()
-        println("OnPause")
+        println("OnPause: Main")
     }
 
     /**
-     * This function gives some logging visibility into the lifecycle for onPause()
+     * This function gives some logging visibility into the lifecycle for onStop()
      */
     override fun onStop() {
         super.onStop()
-        println("OnStop")
+        println("OnStop: Main")
     }
 
     /**
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onRestart() {
         super.onRestart()
-        println("OnRestart")
+        println("OnRestart: Main")
     }
 
     /**
@@ -70,7 +69,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onDestroy() {
         super.onDestroy()
-        println("OnDestroy")
+        println("OnDestroy: Main")
     }
 
     /**
@@ -79,7 +78,7 @@ class MainActivity : AppCompatActivity() {
      */
     fun toastMe(view: View) {
         // val myToast = Toast.makeText(this, message, duration);
-        val myToast = Toast.makeText(this, "Running Scott's File Experiments", Toast.LENGTH_SHORT)
+        val myToast = Toast.makeText(this, "Running Scott's File Experiments", Toast.LENGTH_LONG)
         myToast.show()
 
         //This is an experiment in reading files - It should print out the names of awesome actors to the logs
@@ -135,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         try {
             // Experiment 1 - Read from a source file
             val source_filename = "actors.json"
-            val json = castActors(source_filename)
+            val json = readActorsFile(source_filename)
 
 
             // Experiment 2 - Write to an internal file
@@ -176,7 +175,7 @@ class MainActivity : AppCompatActivity() {
      * @property source_filename - the filename of the source file in 'assets' folder
      * @return json - the json text extracted from the file
      */
-    private fun castActors(source_filename: String): String {
+    private fun readActorsFile(source_filename: String): String {
 
         //Open and read the JSON file
         val inputStream: InputStream = assets.open(source_filename)
